@@ -91,13 +91,14 @@ target/allure-report/index.html
 ```
 ---
 
-## 📸 Screenshot on Failure
-Screenshots are attached automatically:
+## 📸 SAutomatic Screenshot Capture on Test Failure
+When a test fails, the framework automatically captures a screenshot and attaches it to the Allure report for easy debugging.
+This feature is implemented in the @AfterMethod hook and uses a dedicated utility class for consistency and reusability.
 ```java
-@AfterMethod
+@AfterMethod(alwaysRun = true)
 public void tearDown(ITestResult result) {
-    if (ITestResult.FAILURE == result.getStatus()) {
-        ScreenshotUtils.captureScreenshot(getDriver(), result.getName());
+    if (result.getStatus() == ITestResult.FAILURE) {
+        ScreenshotUtils.attachScreenshot(DriverFactory.getDriver(), result.getName());
     }
     DriverFactory.quitDriver();
 }
