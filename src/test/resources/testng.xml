@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="UI Automation Suite" parallel="tests" thread-count="2">
+    <!-- ========================
+         LISTENERS
+         ======================== -->
+    <listeners>
+        <!-- Custom TestNG Listeners -->
+        <listener class-name="com.eliranduveen.listeners.TestListener"/>
+        <listener class-name="com.eliranduveen.listeners.SuiteListener"/>
+
+        <!-- Allure Reporting Listener -->
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
+
+    <!-- ========================
+         TEST GROUPS
+         ======================== -->
+    <test name="First-time Purchase Tests">
+        <classes>
+            <class name="com.eliranduveen.tests.FirstTimePurchaseTest"/>
+        </classes>
+    </test>
+</suite>

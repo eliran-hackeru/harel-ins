@@ -1,0 +1,18 @@
+# Auto detect text files and normalize line endings
+* text=auto
+
+# Treat these as text always
+*.java text
+*.xml text
+*.yml text
+*.md text
+*.properties text
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.zip binary
+*.jar binary

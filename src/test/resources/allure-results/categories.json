@@ -1,0 +1,26 @@
+[
+  {
+    "name": "UI Issues",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*(NoSuchElementException|ElementNotInteractableException|StaleElementReferenceException).*"
+  },
+  {
+    "name": "Assertion Failures",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*AssertionError.*"
+  },
+  {
+    "name": "Timeouts and Wait Issues",
+    "matchedStatuses": ["broken", "failed"],
+    "messageRegex": ".*(TimeoutException|WaitTimeoutException).*"
+  },
+  {
+    "name": "Network / Environment Errors",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*(ConnectionRefused|SocketTimeoutException|UnknownHostException).*"
+  },
+  {
+    "name": "Other Failures",
+    "matchedStatuses": ["failed", "broken"]
+  }
+]
