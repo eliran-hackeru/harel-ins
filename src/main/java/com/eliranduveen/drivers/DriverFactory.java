@@ -16,20 +16,19 @@ public class DriverFactory {
     }
 
     public static WebDriver getDriver() {
-        if (driver.get() == null) {
-            driver.set(initDriver());
-        }
         return driver.get();
     }
 
-    private static WebDriver initDriver() {
-        String browser = ConfigManager.getBrowser().toLowerCase();
-
-        switch (browser) {
-            case "chrome":
-                return createChromeDriver();
-            default:
-                throw new RuntimeException("Unsupported browser: " + browser);
+    public static void initDriver() {
+        if (driver.get() == null) {
+            String browser = ConfigManager.getBrowser().toLowerCase();
+            if (browser.equals("chrome")) {
+                WebDriverManager.chromedriver().setup(); // ✅ auto-download matching version
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--remote-allow-origins=*");
+                if (ConfigManager.isHeadless()) options.addArguments("--headless=new");
+                driver.set(new ChromeDriver(options));
+            }
         }
     }
 

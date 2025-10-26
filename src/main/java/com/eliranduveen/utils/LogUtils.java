@@ -4,6 +4,8 @@ import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static com.eliranduveen.drivers.DriverFactory.getDriver;
+
 public class LogUtils {
 
     private static final Logger logger = LogManager.getLogger(LogUtils.class);
@@ -17,7 +19,7 @@ public class LogUtils {
      */
     public static void info(String message) {
         logger.info(message);
-        Allure.step("INFO: " + message);
+        AllureStepLogger.logStep(getDriver(), "INFO: " + message);
     }
 
     /**
@@ -25,7 +27,7 @@ public class LogUtils {
      */
     public static void warn(String message) {
         logger.warn(message);
-        Allure.step("WARNING: " + message);
+        AllureStepLogger.logStep(getDriver(), "WARNING: " + message);
     }
 
     /**
@@ -33,7 +35,7 @@ public class LogUtils {
      */
     public static void error(String message) {
         logger.error(message);
-        Allure.step("ERROR: " + message);
+        AllureStepLogger.logStep(getDriver(), "ERROR: " + message);
     }
 
     /**

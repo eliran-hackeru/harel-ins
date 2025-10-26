@@ -1,5 +1,6 @@
 package com.eliranduveen.pages;
 
+import com.eliranduveen.utils.AllureStepLogger;
 import com.eliranduveen.utils.WaitUtils;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.*;
@@ -13,6 +14,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.eliranduveen.drivers.DriverFactory.getDriver;
 import static com.eliranduveen.utils.WaitUtils.*;
 
 public class TravelPolicyPage extends BasePage {
@@ -65,7 +67,7 @@ public class TravelPolicyPage extends BasePage {
         String continentName = selectedContinent.getText().trim();
 
         waitForClickable(driver, selectedContinent).click();
-        Allure.step("Selected continent: " + continentName);
+        AllureStepLogger.logStep(getDriver(), "Selected continent: " + continentName);
 
         // Check if Antarctica was selected (based on the text or popup)
         if (continentName.contains("אנטארקטיקה") || continentName.equalsIgnoreCase("Antarctica")) {
@@ -87,7 +89,7 @@ public class TravelPolicyPage extends BasePage {
             String name = continent.getText().trim();
             if (name.equalsIgnoreCase(continentName) || name.contains(continentName)) {
                 waitForClickable(driver, continent).click();
-                Allure.step("Selected continent by name: " + name);
+                AllureStepLogger.logStep(getDriver(), "Selected continent by name: " + name);
                 found = true;
 
                 // Special case: Antarctica triggers warning
@@ -110,7 +112,7 @@ public class TravelPolicyPage extends BasePage {
     private void handleAntarcticaWarning() {
         By understoodButton = By.xpath("//span[contains(text(),'הבנתי')]");
         BasePage.clickIfVisible(driver, understoodButton);
-        Allure.step("Handled Antarctica warning (clicked 'הבנתי' if present)");
+        AllureStepLogger.logStep(getDriver(), "Handled Antarctica warning (clicked 'הבנתי' if present)");
     }
 
     /** Step 4: Click “Next to travel dates” */
@@ -165,7 +167,7 @@ public class TravelPolicyPage extends BasePage {
             WebElement dateButton = WaitUtils.waitForClickable(driver, dateLocator);
             dateButton.click();
 
-            Allure.step("Selected date from Date Picker: " + dateAttribute);
+            AllureStepLogger.logStep(getDriver(), "Selected date from Date Picker: " + dateAttribute);
 
         } catch (NoSuchElementException e) {
             throw new RuntimeException("Could not find elements of the Date Picker.", e);
@@ -180,12 +182,12 @@ public class TravelPolicyPage extends BasePage {
             waitForVisibility(driver, totalDaysLabel);
             String text = totalDaysLabel.getText().trim();  // e.g. "סה\"כ: 30 ימים"
 
-            Allure.step("Total days label text: " + text);
+            AllureStepLogger.logStep(getDriver(), "Total days label text: " + text);
 
             return text.contains("30");
 
         } catch (Exception e) {
-            Allure.step("Failed to verify total days label: " + e.getMessage());
+            AllureStepLogger.logStep(getDriver(), "Failed to verify total days label: " + e.getMessage());
             return false;
         }
     }

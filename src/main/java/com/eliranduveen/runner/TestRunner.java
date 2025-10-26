@@ -16,7 +16,7 @@ import java.util.List;
  * TestRunner dynamically builds and executes TestNG suites.
  * This allows flexibility to run tests programmatically (e.g., CI/CD, Jenkins, Heroku).
  */
-//@Listeners({AllureTestNg.class})
+
 public class TestRunner {
 
     public static void main(String[] args) {

@@ -28,6 +28,7 @@ public class BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method) {
+        DriverFactory.initDriver();
         LogUtils.info("========== Starting test: " + method.getName() + " ==========");
         driver.set(DriverFactory.getDriver());
 

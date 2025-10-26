@@ -1,8 +1,11 @@
 package com.eliranduveen.pages;
 
+import com.eliranduveen.utils.AllureStepLogger;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
+
+import static com.eliranduveen.drivers.DriverFactory.getDriver;
 
 public abstract class BasePage {
     protected WebDriver driver;
@@ -25,10 +28,10 @@ public abstract class BasePage {
             WebElement el = driver.findElement(locator);
             if (el.isDisplayed()) {
                 el.click();
-                Allure.step("Clicked visible element: " + locator);
+                AllureStepLogger.logStep(getDriver(), "Clicked visible element: " + locator);
             }
         } catch (NoSuchElementException ignored) {
-            Allure.step("Element not visible: " + locator);
+            AllureStepLogger.logStep(getDriver(), "Element not visible: " + locator);
         }
     }
 

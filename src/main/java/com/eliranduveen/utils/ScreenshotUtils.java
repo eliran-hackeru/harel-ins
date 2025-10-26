@@ -62,6 +62,7 @@ public final class ScreenshotUtils {
             return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         } catch (Exception e) {
             com.eliranduveen.utils.LogUtils.error("Failed to take screenshot bytes: " + e.getMessage());
+            System.err.println("⚠️ Failed to capture screenshot: " + e.getMessage());
             return new byte[0];
         }
     }
@@ -71,5 +72,17 @@ public final class ScreenshotUtils {
      */
     public static void captureOnFailure(WebDriver driver, String testName) {
         captureScreenshot(driver, "Failure - " + testName);
+    }
+
+    /**
+     * Capture a screenshot and attach it to Allure report.
+     */
+    public static void attachScreenshot(WebDriver driver, String name) {
+        try {
+            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            Allure.addAttachment(name, new ByteArrayInputStream(screenshot));
+        } catch (Exception e) {
+            System.err.println("⚠️ Failed to capture screenshot: " + e.getMessage());
+        }
     }
 }
