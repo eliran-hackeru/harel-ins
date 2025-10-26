@@ -91,7 +91,7 @@ target/allure-report/index.html
 ```
 ---
 
-## 📸 SAutomatic Screenshot Capture on Test Failure
+## 📸 Automatic Screenshot Capture on Test Failure
 When a test fails, the framework automatically captures a screenshot and attaches it to the Allure report for easy debugging.
 This feature is implemented in the @AfterMethod hook and uses a dedicated utility class for consistency and reusability.
 ```java
